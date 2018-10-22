@@ -10,4 +10,4 @@ the master node to setup Hadoop.
 
 This diagram details the architecture:
 
-![AWS Architecture Diagram](diagram/diagram.png "AWS Architecture Diagram")
+![AWS Architecture Diagram](https://github.com/rxt1077/terraform_ansible_aws_hadoop/blob/master/diagrams/diagram.png "AWS Architecture Diagram")
