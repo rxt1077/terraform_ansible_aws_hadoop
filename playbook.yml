@@ -1,0 +1,41 @@
+---
+- hosts: all
+  tasks:
+  - name: Copy /etc/hosts
+    become: yes
+    copy:
+      src: /etc/hosts
+      dest: /etc/hosts
+  - name: Install java-1.8.0
+    become: yes
+    yum:
+      name: java-1.8.0-openjdk
+      state: latest
+  - name: Remove java-1.7.0
+    become: yes
+    yum:
+      name: java-1.7.0-openjdk
+      state: removed
+  - name: Download Hadoop locally
+    local_action:
+      module: get_url
+      url: http://apache.claz.org/hadoop/common/current/hadoop-3.1.1.tar.gz
+      dest: /home/ec2-user/hadoop.tar.gz
+  - name: Create Hadoop directory
+    file:
+      path: /home/ec2-user/hadoop
+      state: directory
+  - name: Extract Hadoop
+    unarchive:
+      src: hadoop.tar.gz
+      extra_opts: ['--strip-components=1']
+      dest: /home/ec2-user/hadoop
+  - name: Extract Hadoop configs
+    unarchive:
+      src: hadoop-configs.tar.gz
+      dest: /home/ec2-user/
+  - name: Copy hadoop/etc/hadoop/workers
+    become: yes
+    copy:
+      src: /home/ec2-user/hadoop/etc/hadoop/workers
+      dest: /home/ec2-user/hadoop/etc/hadoop/workers
