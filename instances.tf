@@ -12,9 +12,9 @@ resource "aws_instance" "master" {
         user = "ec2-user"
         private_key = "${file("~/.ssh/id_rsa")}"
     }
-    # Create a new tar archive each time incase we changed something
+    # Create a new tar archive each time in case we changed something
     provisioner "local-exec" {
-        command = "tar zcf hadoop-configs.tar.gz hadoop"
+        command = "tar zcf /tmp/hadoop-configs.tar.gz hadoop"
     }
     # Get the master able to run Ansible
     provisioner "remote-exec" {
@@ -42,13 +42,13 @@ resource "aws_instance" "master" {
     # This is the Ansible playbook that configures Hadoop on the master and
     # workers
     provisioner "file" {
-        source = "playbook.yml"
-        destination = "playbook.yml"
+        source = "setup_hadoop.yml"
+        destination = "setup_hadoop.yml"
     }
     # These are all the Hadoop config files we use (except etc/hadoop/workers
     # which is generated in Terrform)
     provisioner "file" {
-        source = "hadoop-configs.tar.gz"
+        source = "/tmp/hadoop-configs.tar.gz"
         destination = "hadoop-configs.tar.gz"
     }
     tags {
@@ -66,6 +66,6 @@ resource "aws_instance" "worker" {
     subnet_id = "${aws_subnet.default.id}"
     associate_public_ip_address = true
     tags {
-        Name = "Hadoop Worker ${count.index}"
+        Name = "Hadoop Worker ${count.index + 1}"
     }
 }

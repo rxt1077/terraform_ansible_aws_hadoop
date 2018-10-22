@@ -35,7 +35,14 @@
       src: hadoop-configs.tar.gz
       dest: /home/ec2-user/
   - name: Copy hadoop/etc/hadoop/workers
-    become: yes
     copy:
       src: /home/ec2-user/hadoop/etc/hadoop/workers
       dest: /home/ec2-user/hadoop/etc/hadoop/workers
+- hosts: masters
+  tasks:
+  - name: Format HDFS
+    local_action: command hadoop/bin/hdfs namenode -format -nonInteractive
+  - name: Start HDFS
+    local_action: command hadoop/sbin/start-dfs.sh
+  - name: Start YARN
+    local_action: command hadoop/sbin/start-yarn.sh
