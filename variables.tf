@@ -3,7 +3,7 @@ variable "number_of_workers" {
 }
 
 variable "instance_type" {
-    default = "t2.large"
+    default = "t2.medium"
 }
 
 variable "vpc_cidr" {

@@ -23,4 +23,16 @@
 		<name>yarn.nodemanager.aux-services</name>
 		<value>mapreduce_shuffle</value>
 	</property>
+    <property>
+        <name>yarn.nodemanager.resource.memory-mb</name>
+        <value>25600</value>
+    </property>
+    <property>
+        <name>yarn.scheduler.mini-allocation-mb</name>
+        <value>2048</value>
+    </property>
+    <property>
+        <name>yarn.scheduler.maximum-allocation-mb</name>
+        <value>25600</value>
+    </property>
 </configuration>

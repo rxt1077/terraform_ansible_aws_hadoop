@@ -17,12 +17,25 @@ This diagram details the architecture:
 ## Setup
 
 * *variables.tf* - contains the number of workers and the instance type. It is
-currently set to three workers and t2.large respectively.
+currently set to three workers and t2.medium respectively.
 * *~/.ssh/id_rsa* - your default SSH key will be used to connect to the master
 node.
 * *~/.aws/credentials* - your AWS credentials have to be setup with full
 access for Terraform to construct the cluster.
-
+* *hadoop/etc/hadoop* - you may want to change the memory parameters here if you
+change the instance type or number of workers. Here is the math used to
+calculate the current values: 
+```
+CORES = 3
+DISKS = 3
+RESERVED_MEM = 1GB
+HBASE_MEM = 1GB
+AVAILABLE_RAM_PER_CONTAINER = 2GB
+TOTAL_AVAILABLE_RAM = 2 * 3 = 8GB
+MIN_CONTAINER_SIZE = 256MB
+NUM_CONTAINERS = min(2 * CORES, 1.8 * DISKS = 1.8 * 3, TOTAL_AVAILABLE_RAM / MIN_CONTAINER_SIZE) = 5 
+RAM_PER_CONTAINER = max(MIN_CONTAINER_SIZE, AVAILABLE_RAM_PER_CONTAINER) = 2GB
+```
 ## Running
 
 Clone the repository, initialize terraform, apply terraform, and ssh into the
