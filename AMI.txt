@@ -1,9 +1,9 @@
 AMIs for the workers and master can be found here:
 
-* master  - AMI ID: ami-0117072bce817b436 AMI Name: Tolboom Hadoop Master
-* worker1 - AMI ID: ami-0b2a302a21e01e87e AMI Name: Tolboom Hadoop Worker 1
-* worker2 - AMI ID: ami-048331cbd48fe5f0a AMI Name: Tolboom Hadoop Worker 2
-* worker3 - AMI ID: ami-009b7aae7a7b646c9 AMI Name: Tolboom Hadoop Worker 3
+* master  - AMI ID: ami-0a4e541fdec4711e1 AMI Name: Tolboom - Hadoop Master
+* worker1 - AMI ID: ami-07bebc05b6f6f3c15 AMI Name: Tolboom - Hadoop Worker 1
+* worker2 - AMI ID: ami-020206a4731ac1b7e AMI Name: Tolboom - Hadoop Worker 2
+* worker3 - AMI ID: ami-04e4f03925cb5067f AMI Name: Tolboom - Hadoop Worker 3
 
 These AMIs were setup by using the Terraform and Ansible scripts I created,
 then creating the AMIs from the AWS EC2 console.

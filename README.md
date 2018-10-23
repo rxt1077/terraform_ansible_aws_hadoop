@@ -33,7 +33,8 @@ HBASE_MEM = 1GB
 AVAILABLE_RAM_PER_CONTAINER = 2GB
 TOTAL_AVAILABLE_RAM = 2 * 3 = 8GB
 MIN_CONTAINER_SIZE = 256MB
-NUM_CONTAINERS = min(2 * CORES, 1.8 * DISKS = 1.8 * 3, TOTAL_AVAILABLE_RAM / MIN_CONTAINER_SIZE) = 5 
+NUM_CONTAINERS = min(2 * CORES, 1.8 * DISKS = 1.8 * 3,
+    TOTAL_AVAILABLE_RAM / MIN_CONTAINER_SIZE) = 5 
 RAM_PER_CONTAINER = max(MIN_CONTAINER_SIZE, AVAILABLE_RAM_PER_CONTAINER) = 2GB
 ```
 ## Running
@@ -44,8 +45,8 @@ configuration to bootstrap Ansible on master. It will then run the Ansible
 playbook on master to finish the configuration. Finally it prints out the
 public_ip of master so you can SSH into it.
 ```bash
-git clone https://github.com/rxt1077/terraform_ansible_aws_hadoop.git
-terraform init
-terraform apply
-ssh ec2-user@<public_ip>
+$ git clone https://github.com/rxt1077/terraform_ansible_aws_hadoop.git
+$ terraform init
+$ terraform apply
+$ ssh ec2-user@<public_ip>
 ```
