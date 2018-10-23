@@ -1,0 +1,23 @@
+AMIs for the workers and master can be found here:
+
+* master  - AMI ID: ami-0117072bce817b436 AMI Name: Tolboom Hadoop Master
+* worker1 - AMI ID: ami-0b2a302a21e01e87e AMI Name: Tolboom Hadoop Worker 1
+* worker2 - AMI ID: ami-048331cbd48fe5f0a AMI Name: Tolboom Hadoop Worker 2
+* worker3 - AMI ID: ami-009b7aae7a7b646c9 AMI Name: Tolboom Hadoop Worker 3
+
+These AMIs were setup by using the Terraform and Ansible scripts I created,
+then creating the AMIs from the AWS EC2 console.
+
+In general the configuration process is:
+
+1. Remove java-1.7.0 and install java-1.8.0
+2. Setup SSH keys on master (SSH default) and workers (auto generated)
+3. Setup /etc/hosts for every node
+4. Put Hadoop on every node
+5. Copy the hadoop config files to every node
+6. Setup hadoop/etc/workers on every node
+7. Install java-1.8.0-devel on master
+8. Start DFS and YARN on every node
+
+More details can be found in the README file and in the comments of the
+Terraform and Ansible scripts.

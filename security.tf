@@ -23,18 +23,18 @@ resource "aws_security_group" "public" {
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
-    ingress {
-        from_port = 50070
-        to_port = 50070
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
-    ingress {
-        from_port = 8088
-        to_port = 8088
-        protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
-    }
+#    ingress {
+#        from_port = 50070
+#        to_port = 50070
+#        protocol = "tcp"
+#        cidr_blocks = ["0.0.0.0/0"]
+#    }
+#    ingress {
+#        from_port = 8088
+#        to_port = 8088
+#        protocol = "tcp"
+#        cidr_blocks = ["0.0.0.0/0"]
+#    }
     ingress {
         from_port = 0
         to_port = 0

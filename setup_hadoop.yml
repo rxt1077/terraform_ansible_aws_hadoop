@@ -36,10 +36,20 @@
       dest: /home/ec2-user/
   - name: Copy hadoop/etc/hadoop/workers
     copy:
-      src: /home/ec2-user/hadoop/etc/hadoop/workers
+      src: /home/ec2-user/workers
       dest: /home/ec2-user/hadoop/etc/hadoop/workers
 - hosts: masters
   tasks:
+  - name: Install java-1.8.0-devel
+    become: yes
+    yum: 
+      name: java-1.8.0-openjdk-devel
+      state: latest
+  - name: Install git
+    become: yes
+    yum:
+      name: git
+      state: latest
   - name: Format HDFS
     local_action: command hadoop/bin/hdfs namenode -format -nonInteractive
   - name: Start HDFS

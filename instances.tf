@@ -17,6 +17,18 @@ resource "aws_instance" "master" {
         command = "tar zcf /tmp/hadoop-configs.tar.gz hadoop"
     }
     # Get the master able to run Ansible
+    # This is the Ansible playbook that configures Hadoop on the master and
+    # workers
+    provisioner "file" {
+        source = "setup_hadoop.yml"
+        destination = "setup_hadoop.yml"
+    }
+    # These are all the Hadoop config files we use (except etc/hadoop/workers
+    # which is generated in Terrform)
+    provisioner "file" {
+        source = "/tmp/hadoop-configs.tar.gz"
+        destination = "hadoop-configs.tar.gz"
+    }
     provisioner "remote-exec" {
         inline = [
             # Install ansible on master
@@ -35,21 +47,10 @@ resource "aws_instance" "master" {
             # Setup our /etc/ansible/hosts on master
             "sudo sh -c 'echo \"${data.template_file.ansible_hosts.rendered}\" > /etc/ansible/hosts'",
             # Setup our /home/ec2-user/hadoop/etc/hadoop/workers on master
-            "mkdir -p ~/hadoop/etc/hadoop",
-            "echo \"${data.template_file.hadoop_workers.rendered}\" > ~/hadoop/etc/hadoop/workers",
+            "echo \"${data.template_file.hadoop_workers.rendered}\" > ~/workers",
+            # Run our playbook
+            "ansible-playbook setup_hadoop.yml", 
         ]
-    }
-    # This is the Ansible playbook that configures Hadoop on the master and
-    # workers
-    provisioner "file" {
-        source = "setup_hadoop.yml"
-        destination = "setup_hadoop.yml"
-    }
-    # These are all the Hadoop config files we use (except etc/hadoop/workers
-    # which is generated in Terrform)
-    provisioner "file" {
-        source = "/tmp/hadoop-configs.tar.gz"
-        destination = "hadoop-configs.tar.gz"
     }
     tags {
         Name = "Hadoop Master"

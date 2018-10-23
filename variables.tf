@@ -1,13 +1,9 @@
 variable "number_of_workers" {
-    default = 1
+    default = 3
 }
 
 variable "instance_type" {
-    default = "t2.micro"
-}
-
-variable "hadoop_version" {
-    default = "3.1.1"
+    default = "t2.large"
 }
 
 variable "vpc_cidr" {
@@ -17,7 +13,3 @@ variable "vpc_cidr" {
 variable "subnet_cidr" {
     default = "10.0.1.0/24"
 }
-
-#variable "private_cidr" {
-#    default = "10.0.2.0/24"
-#}
